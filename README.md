@@ -1,2 +1,2 @@
-# tic-tac-toe
-Tic tac toe with unbeatable ai opponent.
+# Tic-tac-toe
+Tic-tac-toe game with AI opponent. AI has two difficulty levels, normal and unbeatbale.
