@@ -5,8 +5,8 @@ import java.util.List;
 
 // Represents combinations of positions that result in a win
 public enum WinCombo {
-    TOPROW (0,1,2), MIDROW (3,4,5), BOTTOMROW (6,7,8), LEFTCOL (0,3,6), MIDCOL (1,4,7), RIGHTCOL (2,5,8),
-    BACKDIAGONAL(0,4,8), FORWARDIAGONAL (2,4,6);
+    TOP_ROW (0,1,2), MID_ROW (3,4,5), BOTTOM_ROW (6,7,8), LEFT_COL (0,3,6), MID_COL (1,4,7), RIGHT_COL (2,5,8),
+    BACK_DIAGONAL(0,4,8), FORWARD_DIAGONAL (2,4,6);
 
     private List<Integer> positions;
 

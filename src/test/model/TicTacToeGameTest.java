@@ -1,5 +1,6 @@
 package model;
 
+import model.exceptions.OccupiedPositionException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,14 +20,22 @@ public class TicTacToeGameTest {
 
     @Test
     void testPlacePieceFirstX() {
-        game.placePiece(SquareState.X, 0);
+        try {
+            game.placePiece(SquareState.X, 0);
+        } catch (OccupiedPositionException e) {
+            fail("shouldn't get here");
+        }
         assertEquals(9, board.size());
         assertTrue(board.contains(SquareState.X));
     }
 
     @Test
     void testPlacePieceFirstO() {
-        game.placePiece(SquareState.O, 0);
+        try {
+            game.placePiece(SquareState.O, 0);
+        } catch (OccupiedPositionException e) {
+            fail("shouldn't get here");
+        }
         assertEquals(9, board.size());
         assertTrue(board.contains(SquareState.O));
     }
@@ -35,9 +44,17 @@ public class TicTacToeGameTest {
     void testPlacePieceMany() {
         for (int i = 0; i < 6; i++) {
             if (i % 2 == 0) {
-                game.placePiece(SquareState.X, i);
+                try {
+                    game.placePiece(SquareState.X, i);
+                } catch (OccupiedPositionException e) {
+                    fail("shouldn't get here");
+                }
             } else {
-                game.placePiece(SquareState.O, i);
+                try {
+                    game.placePiece(SquareState.O, i);
+                } catch (OccupiedPositionException e) {
+                    fail("shouldn't get here");
+                }
             }
         }
         assertEquals(9, board.size());
@@ -49,9 +66,18 @@ public class TicTacToeGameTest {
 
     @Test
     void testPlacePieceOccupied() {
-        game.placePiece(SquareState.X, 0);
+        try {
+            game.placePiece(SquareState.X, 0);
+        } catch (OccupiedPositionException e) {
+            fail("shouldn't get here");
+        }
         List<SquareState> old = board;
-        game.placePiece(SquareState.O, 0);
+        try {
+            game.placePiece(SquareState.O, 0);
+            fail("OccupiedPositionException was never thrown.");
+        } catch (OccupiedPositionException e) {
+            // Pass
+        }
         assertEquals(old, board);
         assertFalse(board.contains(SquareState.O));
         assertTrue(game.getOPieces().isEmpty());

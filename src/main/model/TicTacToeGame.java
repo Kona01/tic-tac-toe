@@ -1,5 +1,7 @@
 package model;
 
+import model.exceptions.OccupiedPositionException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,12 +36,16 @@ public class TicTacToeGame {
         return opieces;
     }
 
+    public GameState getGameState() {
+        return gameState;
+    }
+
     // REQUIRES: piece is either X or O, SquareState at position is BLANK
     // MODIFIES: this
     // EFFECTS: changes SquareState at position to piece, and adds position to list of x or o piece locations
-    public void placePiece(SquareState piece, int position) {
+    public void placePiece(SquareState piece, int position) throws OccupiedPositionException {
         if (board.get(position) != SquareState.BLANK) {
-            return;
+            throw new OccupiedPositionException();
         }
         board.set(position, piece);
         if (piece == SquareState.X) {
@@ -55,10 +61,10 @@ public class TicTacToeGame {
     private void checkForGameFinished() {
         for (WinCombo wc : WinCombo.values()) {
             if (xpieces.containsAll(wc.getPositions())) {
-                gameState = GameState.XWINS;
+                gameState = GameState.X_WINS;
                 return;
             } else if (opieces.containsAll(wc.getPositions())) {
-                gameState = GameState.OWINS;
+                gameState = GameState.O_WINS;
                 return;
             }
         }
