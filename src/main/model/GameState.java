@@ -4,9 +4,13 @@ package model;
 public enum GameState {
     PLAYING ("Still playing..."), X_WINS ("You win!"), O_WINS ("You lose..."), DRAW ("It's a draw.");
 
-    public final String message;
+    public String message;
 
     GameState(String s) {
+        message = s;
+    }
+
+    public void setMessage(String s) {
         message = s;
     }
 }

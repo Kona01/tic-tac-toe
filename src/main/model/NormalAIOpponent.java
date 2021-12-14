@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AIOpponent {
+public class NormalAIOpponent {
 
     private TicTacToeGame game;
     private SquareState piece;
 
-    public AIOpponent(TicTacToeGame game) {
+    public NormalAIOpponent(TicTacToeGame game) {
         this.game = game;
     }
 
