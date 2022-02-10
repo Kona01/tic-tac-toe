@@ -102,7 +102,7 @@ public class GameBoard {
 
     private void doAIMove() {
         System.out.println("Opponent's move");
-        ai.move(game.getBoard());
+        ai.move(game);
     }
 
     private void endMessage() {

@@ -6,20 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class NormalAIOpponent {
-
-    private TicTacToeGame game;
-    private SquareState piece;
+public class NormalAIOpponent extends AIOpponent{
 
     public NormalAIOpponent(TicTacToeGame game) {
-        this.game = game;
+        super(game);
     }
 
-    public void setPiece(SquareState piece) {
-        this.piece = piece;
-    }
-
-    public void move(List<SquareState> board) {
+    public void move(TicTacToeGame game) {
+        List<SquareState> board = game.getBoard();
         List<Integer> positions = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             if (board.get(i) == SquareState.BLANK) {

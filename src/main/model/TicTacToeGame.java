@@ -24,6 +24,14 @@ public class TicTacToeGame {
         gameState = GameState.PLAYING;
     }
 
+    // EFFECTS: creates a copy of a tic-tac-toe game
+    public TicTacToeGame(TicTacToeGame game) {
+        this.board = game.getBoard();
+        this.xpieces = game.getXPieces();
+        this.opieces = game.getOPieces();
+        this.gameState = game.getGameState();
+    }
+
     public List<SquareState> getBoard() {
         return board;
     }
