@@ -25,11 +25,16 @@ public class TicTacToeGame {
     }
 
     // EFFECTS: creates a copy of a tic-tac-toe game
-    public TicTacToeGame(TicTacToeGame game) {
-        this.board = game.getBoard();
-        this.xpieces = game.getXPieces();
-        this.opieces = game.getOPieces();
-        this.gameState = game.getGameState();
+    public TicTacToeGame(TicTacToeGame other) {
+        board = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            board.add(other.getBoard().get(i));
+        }
+        xpieces = new ArrayList<>();
+        xpieces.addAll(other.getXPieces());
+        opieces = new ArrayList<>();
+        opieces.addAll(other.getOPieces());
+        this.gameState = other.getGameState();
     }
 
     public List<SquareState> getBoard() {
@@ -66,7 +71,7 @@ public class TicTacToeGame {
 
     // MODIFIES: this
     // EFFECTS: checks to see if the game is over, and changes gameState accordingly
-    private void checkForGameFinished() {
+    public void checkForGameFinished() {
         for (WinCombo wc : WinCombo.values()) {
             if (xpieces.containsAll(wc.getPositions())) {
                 gameState = GameState.X_WINS;

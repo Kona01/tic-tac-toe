@@ -1,9 +1,6 @@
 package ui;
 
-import model.NormalAIOpponent;
-import model.GameState;
-import model.SquareState;
-import model.TicTacToeGame;
+import model.*;
 import model.exceptions.OccupiedPositionException;
 
 import java.util.List;
@@ -19,10 +16,10 @@ import static model.SquareState.X;
 public class GameBoard {
 
     private TicTacToeGame game;
-    private NormalAIOpponent ai;
+    private AIOpponent ai;
     private Scanner input;
-    private SquareState player = X;
-    private SquareState opponent = O;
+    private SquareState player;
+    private SquareState opponent;
     private static final String SPACE = "   ";
 
     // EFFECTS:runs the
@@ -32,6 +29,8 @@ public class GameBoard {
 
     private void runGame() throws InterruptedException {
         init();
+
+        chooseDifficulty();
 
         choosePiece();
         ai.setPiece(opponent);
@@ -50,9 +49,22 @@ public class GameBoard {
         endMessage();
     }
 
+    private void chooseDifficulty() {
+        System.out.println("Choose difficulty: Normal or Impossible");
+        String command = input.next();
+        command = command.toLowerCase();
+        if (command.equals("normal")) {
+            ai = new NormalAIOpponent(game);
+        } else if (command.equals("impossible")) {
+            ai = new ImpossibleAIOpponent(game);
+        } else {
+            System.out.println("Invalid selection");
+            chooseDifficulty();
+        }
+    }
+
     private void init() {
         game = new TicTacToeGame();
-        ai = new NormalAIOpponent(game);
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
